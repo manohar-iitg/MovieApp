@@ -24,9 +24,7 @@ class TrendingMovies extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: trending.length,
                 itemBuilder: (context, index) {
-                  String title = trending[index]['title'] != null
-                      ? trending[index]['title']
-                      : trending[index]['original_name'];
+                  String title = trending[index]['title'] ?? trending[index]['original_name'];
                   return InkWell(
                     onTap: () {
                       Navigator.push(
@@ -44,9 +42,7 @@ class TrendingMovies extends StatelessWidget {
                                     vote: trending[index]['vote_average']
                                         .toString(),
                                     launch_on:
-                                        trending[index]['release_date'] != null
-                                            ? trending[index]['release_date']
-                                            : trending[index]['first_air_date'],
+                                        trending[index]['release_date'] ?? trending[index]['first_air_date'],
                                   )));
                     },
                     child: Container(
@@ -110,9 +106,7 @@ class TopMovies extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Description(
-                                    name: topmovie[index]['title'] != null
-                                        ? topmovie[index]['title']
-                                        : topmovie[index]['original_name'],
+                                    name: topmovie[index]['title'] ?? topmovie[index]['original_name'],
                                     bannerurl:
                                         'https://image.tmdb.org/t/p/w500' +
                                             topmovie[index]['backdrop_path'],
@@ -143,9 +137,7 @@ class TopMovies extends StatelessWidget {
                           ),
                           Container(
                             child: Text(
-                                topmovie[index]['title'] != null
-                                    ? topmovie[index]['title']
-                                    : topmovie[index]['original_name'],
+                                topmovie[index]['title'] ?? topmovie[index]['original_name'],
                                 style:
                                     GoogleFonts.ubuntu(color: Colors.white70)),
                           )
@@ -189,9 +181,7 @@ class NowPlay extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Description(
-                                    name: nowplaymv[index]['title'] != null
-                                        ? nowplaymv[index]['title']
-                                        : nowplaymv[index]['original_name'],
+                                    name: nowplaymv[index]['title'] ?? nowplaymv[index]['original_name'],
                                     bannerurl:
                                         'https://image.tmdb.org/t/p/w500' +
                                             nowplaymv[index]['backdrop_path'],
@@ -222,9 +212,7 @@ class NowPlay extends StatelessWidget {
                           ),
                           Container(
                             child: Text(
-                                nowplaymv[index]['title'] != null
-                                    ? nowplaymv[index]['title']
-                                    : nowplaymv[index]['original_name'],
+                                nowplaymv[index]['title'] ?? nowplaymv[index]['original_name'],
                                 style:
                                     GoogleFonts.ubuntu(color: Colors.white70)),
                           )

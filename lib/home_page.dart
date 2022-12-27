@@ -30,19 +30,19 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  List searcher=[];
+  List searcher = [];
   fetchresult(String reqmv) async {
     var url;
-    url=await http.get(Uri.parse("https://api.themoviedb.org/3/search/movie?api_key=3376a18a481faea92be0a6cd7c14d413&language=en-US&query=${reqmv}&page=1&include_adult=false)"));
+    url = await http.get(Uri.parse(
+        "https://api.themoviedb.org/3/search/movie?api_key=3376a18a481faea92be0a6cd7c14d413&language=en-US&query=$reqmv&page=1&include_adult=false)"));
     setState(() {
-      searcher=json.decode(url.body)['results'];
+      searcher = json.decode(url.body)['results'];
     });
   }
 
   loadmovies() async {
     TMDB tmdbLogs = TMDB(ApiKeys(apikey, readaccesstoken));
-    logConfig:
-    ConfigLogger(
+    const ConfigLogger(
       showLogs: true,
       showErrorLogs: true,
     );
@@ -56,8 +56,8 @@ class _HomeState extends State<Home> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
-    //fetchresult("Godfather");
     TextEditingController _searchbar = TextEditingController();
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -70,18 +70,20 @@ class _HomeState extends State<Home> {
           TextButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut().then((value) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()));
                 });
               },
-              child: Text("SIGN OUT"))
+              child: const Text("SIGN OUT"))
         ],
         backgroundColor: Colors.black,
       ),
       body: Container(
         width: w,
         height: h,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -95,7 +97,7 @@ class _HomeState extends State<Home> {
                 color: Colors.white.withOpacity(0.9),
               ),
               decoration: InputDecoration(
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.movie_filter_outlined,
                   color: Colors.white70,
                 ),
@@ -120,12 +122,21 @@ class _HomeState extends State<Home> {
               ),
             ),
             //ElevatedButton.icon(onPressed: (){fetchresult(_searchbar.text);}, icon: Icon(Icons.keyboard), label: Text("Enter")),
-            ElevatedButton.icon(onPressed: () async {
-              await fetchresult(_searchbar.text);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchRes(searcher: searcher,)));
-            }, icon: Icon(Icons.search),
-              label: Text("Search for Movies"),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent),),
+            ElevatedButton.icon(
+              onPressed: () async {
+                await fetchresult(_searchbar.text);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchRes(
+                              searcher: searcher,
+                            )));
+              },
+              icon: const Icon(Icons.search),
+              label: const Text("Search for Movies"),
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.transparent),
+            ),
             TrendingMovies(trending: trendingmovies),
             TopMovies(topmovie: topratedmovies),
             NowPlay(nowplaymv: nowplay),

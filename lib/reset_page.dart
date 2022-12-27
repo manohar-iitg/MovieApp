@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_project/custom_widgets.dart';
-import 'package:firebase_project/home_page.dart';
+
 import 'package:flutter/material.dart';
 
 class resetpg extends StatefulWidget {
@@ -12,7 +11,7 @@ class resetpg extends StatefulWidget {
 }
 
 class _resetpgState extends State<resetpg> {
-  TextEditingController _emailcontrollerrs = TextEditingController();
+  final TextEditingController _emailcontrollerrs = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

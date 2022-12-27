@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_project/custom_widgets.dart';
 import 'package:firebase_project/home_page.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +12,9 @@ class SignupPg extends StatefulWidget {
 }
 
 class _SignupPgState extends State<SignupPg> {
-  TextEditingController _usernamecontrollerup = TextEditingController();
-  TextEditingController _passwordcontrollerup = TextEditingController();
-  TextEditingController _emailcontrollerup = TextEditingController();
+  final TextEditingController _usernamecontrollerup = TextEditingController();
+  final TextEditingController _passwordcontrollerup = TextEditingController();
+  final TextEditingController _emailcontrollerup = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class _SignupPgState extends State<SignupPg> {
       body: Container(
         width: w,
         height: h,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -45,22 +44,22 @@ class _SignupPgState extends State<SignupPg> {
             padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 mytextfield("Enter Username", Icons.person_outline, false,
                     _usernamecontrollerup),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 mytextfield("Enter e-mail address", Icons.mail_outline, false,
                     _emailcontrollerup),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 mytextfield("Enter Password", Icons.lock_outline, true,
                     _passwordcontrollerup),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 mybutton(context, "SIGN UP", () {
@@ -69,13 +68,11 @@ class _SignupPgState extends State<SignupPg> {
                           email: _emailcontrollerup.text,
                           password: _passwordcontrollerup.text)
                       .then((value) {
-                    print("Created New Account");
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home()));
+                        MaterialPageRoute(builder: (context) => const Home()));
                   }).onError((error, stackTrace) {
                     Fluttertoast.showToast(
                         msg: error.toString(), gravity: ToastGravity.TOP);
-                    print("Error ${error.toString()}");
                   });
                 })
               ],
