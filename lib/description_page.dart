@@ -38,7 +38,7 @@ class Description extends StatelessWidget {
           Container(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                'Release Date - ' + launch_on,
+                "Release Date -${launch_on}        Rating - ${vote}/10",
                 style: GoogleFonts.ubuntu(fontSize: 14, color: Colors.white),
               )),
           Row(

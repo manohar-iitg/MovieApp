@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_project/login_page.dart';
 import 'package:firebase_project/movies.dart';
+import 'package:firebase_project/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -27,6 +30,15 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  List searcher=[];
+  fetchresult(String reqmv) async {
+    var url;
+    url=await http.get(Uri.parse("https://api.themoviedb.org/3/search/movie?api_key=3376a18a481faea92be0a6cd7c14d413&language=en-US&query=${reqmv}&page=1&include_adult=false)"));
+    setState(() {
+      searcher=json.decode(url.body)['results'];
+    });
+  }
+
   loadmovies() async {
     TMDB tmdbLogs = TMDB(ApiKeys(apikey, readaccesstoken));
     logConfig:
@@ -45,6 +57,8 @@ class _HomeState extends State<Home> {
   }
 
   Widget build(BuildContext context) {
+    //fetchresult("Godfather");
+    TextEditingController _searchbar = TextEditingController();
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -75,6 +89,43 @@ class _HomeState extends State<Home> {
         )),
         child: ListView(
           children: [
+            TextField(
+              controller: _searchbar,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.9),
+              ),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.movie_filter_outlined,
+                  color: Colors.white70,
+                ),
+                labelText: "Enter the Movie",
+                labelStyle: TextStyle(
+                  color: Colors.white.withOpacity(0.9),
+                ),
+                filled: true,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                fillColor: Colors.white.withOpacity(0.3),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: const BorderSide(color: Colors.transparent),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: const BorderSide(color: Colors.black, width: 1),
+                ),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(style: BorderStyle.none)),
+              ),
+            ),
+            //ElevatedButton.icon(onPressed: (){fetchresult(_searchbar.text);}, icon: Icon(Icons.keyboard), label: Text("Enter")),
+            ElevatedButton.icon(onPressed: () async {
+              await fetchresult(_searchbar.text);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchRes(searcher: searcher,)));
+            }, icon: Icon(Icons.search),
+              label: Text("Search for Movies"),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent),),
             TrendingMovies(trending: trendingmovies),
             TopMovies(topmovie: topratedmovies),
             NowPlay(nowplaymv: nowplay),

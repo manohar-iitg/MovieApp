@@ -27,7 +27,6 @@ class TrendingMovies extends StatelessWidget {
                   String title = trending[index]['title'] != null
                       ? trending[index]['title']
                       : trending[index]['original_name'];
-                  print(trending[index]);
                   return InkWell(
                     onTap: () {
                       Navigator.push(
