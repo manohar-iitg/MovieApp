@@ -1,16 +1,20 @@
-# firebase_project
+# Movie Database App
+This is a Flutter App which shows information regarding latest trending movies with an integration of firebase.
 
-A new Flutter project.
+## Firebase Authentication
+This app is integrated with firebase. 
+The app shows a sign-in page as soon as it is opened.
+New users can use the sign-up option to sign up. 
+Also, the user can reset the password using reset password option, incase they forget the password.
 
-## Getting Started
+## Home Page
+The home page shows up three rows - Trending Movies & Shows, Top Rated Movies, Now Playing.
+By clicking on the movie name/icon, we get to the description page of the movie.
 
-This project is a starting point for a Flutter application.
+## Search Bar
+The home page also contains the search bar where one can search for movies and list of matching titles shows up.
+On clicking on a movie in the list, the description of the movie pops up.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Description Page
+The description page of the movie contains information regarding it.
+It includes - Release Date, Rating and Overview.
