@@ -18,3 +18,6 @@ On clicking on a movie in the list, the description of the movie pops up.
 ## Description Page
 The description page of the movie contains information regarding it.
 It includes - Release Date, Rating and Overview.
+
+## Further plans
+To include google sign-in option. To include more features like sorting movies.
